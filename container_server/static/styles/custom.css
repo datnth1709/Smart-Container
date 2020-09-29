@@ -1,0 +1,99 @@
+
+/*Fixxing bottstrap styles*/
+.submit-row a.closelink {
+    box-sizing: unset;
+}
+
+.delete-confirmation form .cancel-link {
+    display: initial;
+}
+
+/*End fixxing bottstrap styles*/
+
+/*Add Images*/
+.assets-container {
+
+}
+
+.person-asset {
+
+}
+
+/*End Add Images*/
+
+
+/* Door unlock AIP*/
+a:not([href]):not([tabindex]) {
+    color: white;
+}
+
+a:not([href]):not([tabindex]):hover {
+    color: white;
+}
+
+a.button {
+    background: #417690;
+}
+
+a.button:hover {
+    background: #549dc1;
+}
+
+/* End Door unlock API*/
+
+/* Arrow loader */
+.arrow-loader-container {
+    width: auto;
+    height: auto;
+    padding-left: 20px;
+}
+
+.arrow-reload {
+    cursor: pointer;
+    color: #417690;
+    font-family: Lucida Sans Unicode;
+    font-weight: bold;
+
+    font-size: 30px;
+    position: relative;
+    /*animation-name: spin;*/
+    animation-duration: 1000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.arrow-reload:hover {
+
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* END Arrow loader */
+
+.btn-classic {
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    background: #fff;
+    box-shadow: 0 -15px 20px -10px rgba(0, 0, 0, 0.15) inset;
+    color: #333;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+.btn-classic:hover{
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.text-md {
+    font-size: 1em;
+}
+
+.text-sm{
+    font-size: 0.8em;
+}

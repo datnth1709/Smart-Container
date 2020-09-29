@@ -1,0 +1,85 @@
+{% extends "web_admin/base/customize_base.html" %}
+{% load i18n admin_list static admin_urls %}
+
+{% block content %}
+{% block result_list %}
+{% block search %}{% search_form cl %}{% endblock %}
+<form id="changelist-form" method="post" novalidate>{% csrf_token %}
+  {% if action_form and actions_on_top and cl.show_admin_actions %}{% admin_actions %}{% endif %}
+  {% result_list cl %}
+</form>
+{% endblock %}
+{% block pagination %}{% pagination cl %}{% endblock %}
+{% endblock %}
+
+{% block style %}
+{{ block.super }}
+<div>
+  <style>
+    .table td {
+      vertical-align: middle !important;
+    }
+
+    .table th {
+      vertical-align: middle !important;
+    }
+  </style>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ block.super }}
+
+<script>
+  $(document).ready(function () {
+    bind();
+    $('#dataTable_length').append('<p href="#" id="choose_all" class="btn btn-info" style="margin-left:20px;cursor:pointer;position:relative;top:7px;">Choose all</p>');
+    let checked = false;
+    $('#choose_all').click(function () {
+      $('.action-select').prop('checked', !checked);
+      checked = !checked
+    });
+
+    $('tr th:first').css('width', '30px');
+
+    $("#dataTable").bind("DOMSubtreeModified", function () {
+      bind()
+    });
+
+    function bind() {
+      {% if display_fields %}
+      $('.row2').css("background-color", "white");
+      const field_classes = [];
+      {% for field in display_fields %}
+      field_classes.push('field-{{ field }}');
+      {% endfor %}
+
+      $.each($('.' + field_classes[0]), function (index, value) {
+        var href = $($(value).find('a')).attr('href');
+
+        $.each(field_classes, function (i, v) {
+          $('.' + v).eq(index).click(function () {
+            window.open(href, '_parent')
+          })
+        })
+      });
+
+      $.each(field_classes, function (index, value) {
+        $('.' + value).hover(function () {
+          $(this).css('cursor', 'pointer');
+          $(this).parent().css("background-color", "aliceblue");
+        }, function () {
+          $(this).parent().css("background-color", "white");
+        })
+      });
+      {% endif %}
+
+      {% for field in center_fields %}
+      $('.field-' + '{{ field }}').addClass('d-flex justify-content-center');
+      {% endfor %}
+    }
+  });
+
+</script>
+{% endblock %}
+

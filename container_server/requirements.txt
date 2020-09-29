@@ -1,0 +1,16 @@
+Django~=3.0.4
+djangorestframework~=3.11.0
+django-jsonfield~=1.4.0
+django-import-export~=2.0.2
+
+psycopg2-binary~=2.8.5
+
+opencv-python~=4.1.2
+tensorflow~=1.14.0
+# tensorflow-gpu~=1.14.0
+numpy~=1.18.1
+Pillow~=7.0.0
+imutils~=0.5.3
+pytesseract
+protobuf==3.6.0
+

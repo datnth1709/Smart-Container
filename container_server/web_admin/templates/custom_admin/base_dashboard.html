@@ -1,0 +1,149 @@
+{% extends 'custom_admin/my_base.html' %}
+{% load customtag i18n static %}
+
+
+{% block script %}
+    {{ block.super }}
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        #scroll-to-top {
+            cursor: pointer;
+            width: 2.75rem;
+            height: 2.75rem;
+            text-align: center;
+            color: #fff;
+            background: rgba(90, 92, 105, .5);
+            line-height: 46px;
+        }
+
+        #scroll-to-top:hover {
+            background: rgba(90, 92, 105, .7);
+        }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+{#        {% dashboard_sidebar %}#}
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+{#                {% dashboard_topbar %}#}
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Messages -->
+{#                    <div id="messages">#}
+{#                        {% block messages %}#}
+{#                            {% if messages %}#}
+{#                                {% for message in messages %}#}
+{#                                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}"#}
+{#                                         role="alert">#}
+{#                                        {{ message|capfirst }}#}
+{#                                        <button type="button" class="close close_btn" aria-label="Close">#}
+{#                                            <span aria-hidden="true">&times;</span>#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+{#                            {% if user.is_authenticated %}#}
+{#                                {% update_model_message %}#}
+{#                            {% endif %}#}
+{#                            <script>#}
+{#                                $(document).ready(function () {#}
+{#                                    $('.close_btn').unbind('click').bind('click', function () {#}
+{#                                        $(this).parent().remove()#}
+{#                                    })#}
+{#                                })#}
+{#                            </script>#}
+{#                        {% endblock messages %}#}
+{#                    </div>#}
+                    <!-- END Messages -->
+
+                    <!-- Page Heading -->
+                    {% block content_title %}
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">{% if title %}{{ title }}{% endif %}</h1>
+                        </div>
+                    {% endblock %}
+
+                    {% block object-tools %}
+                        <div class="row" style="float: right;position: relative;margin-right: 2px;margin-top: -65px;">
+                            {% block object-tools-items %}{% endblock %}
+                        </div>
+                    {% endblock %}
+
+                    <div id="content" class="col-md-12">
+                        {% block content %}
+
+                            {# CONTENT #}
+
+                        {% endblock %}
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            {% block footer %}
+                <footer class="sticky-footer bg-white" style="margin-top: 20px;">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; F.Smart Door</span>
+                        </div>
+                    </div>
+                </footer>
+            {% endblock %}
+
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <div class="right-bottom-tools" style="right: 1rem; bottom: 1rem; position: fixed;">
+        {% block right_bottom_tools %}
+            <div class="rounded scroll-to-top" style="position: initial;margin-left: auto">
+                <i class="fas fa-angle-up"></i>
+
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('.scroll-to-top').on('click', function () {
+                        $("html, body").animate({scrollTop: 0}, "slow");
+                    })
+                })
+            </script>
+        {% endblock %}
+    </div>
+
+
+    {# Logout Modal #}
+    {% include 'custom_admin/logout_modal.html' %}
+
+    {{ block.super }}
+
+{% endblock %}

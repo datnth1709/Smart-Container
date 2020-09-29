@@ -1,0 +1,141 @@
+{% load static i18n %}
+
+<style>
+    #history_filter * {
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    #history_filter {
+        margin-bottom: 5px;
+    }
+
+    #datetimepicker-start * {
+        margin: 0;
+    }
+
+    #datetimepicker-end * {
+        margin: 0;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'styles/tempusdominus-bootstrap-4.min.css' %}"/>
+
+<script src="{% static 'scripts/moment.min.js' %}"></script>
+<script src="{% static 'scripts/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+
+<div id="history_filter" style="width: 100%;">
+    <form id="id_history_filter" method="get">
+        <div class="row">
+            <select class="form-control-sm" id="inout" name="inout">
+                <option value="0">Unknown</option>
+                <option value="-1">In</option>
+                <option value="1">Out</option>
+                <option value="*">Both of them</option>
+            </select>
+
+            <div>
+                <div class="input-group date datetimepicker" id="datetimepicker-start" data-target-input="nearest">
+                    <input id="datetimepicker-start-input" type="text" class="form-control-sm datetimepicker-input"
+                           data-target="#datetimepicker-start" name="start_date"
+                           placeholder="From" autocomplete="off"/>
+                    <div class="input-group-append" data-target="#datetimepicker-start" data-toggle="datetimepicker">
+                        <div id="from-i" class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="input-group date datetimepicker" id="datetimepicker-end" data-target-input="nearest">
+                    <input id="datetimepicker-end-input" type="text" class="form-control-sm datetimepicker-input"
+                           data-target="#datetimepicker-end" name="end_date" placeholder="To"
+                           autocomplete="off"/>
+                    <div class="input-group-append" data-target="#datetimepicker-end" data-toggle="datetimepicker">
+                        <div id="to-i" class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-classic" type="submit"
+                    style="margin: 0; height: 30px;">Apply
+            </button>
+
+        </div>
+
+    </form>
+
+    <script>
+        $('#from-i').click(function () {
+            let today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+
+            $('#datetimepicker-start-input').val(dd + '-' + mm + '-' + yyyy + ', 00:00');
+        });
+        $('#datetimepicker-start-input').click(function () {
+            $('#from-i').click()
+        });
+        $('#to-i').click(function () {
+            let today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+
+            $('#datetimepicker-end-input').val(dd + '/' + mm + '/' + yyyy + ', 23:59');
+        });
+        $('#datetimepicker-end-input').click(function () {
+            $('#to-i').click()
+        });
+        $(function () {
+            $('#datetimepicker-end').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-arrow-up',
+                    down: 'fa fa-arrow-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-delete',
+                    close: 'fa fa-times'
+                },
+                format: 'DD/MM/YYYY, HH:mm'
+            });
+        });
+        $(function () {
+            $('#datetimepicker-start').datetimepicker({
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-arrow-up',
+                    down: 'fa fa-arrow-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-delete',
+                    close: 'fa fa-times'
+                },
+                format: 'DD/MM/YYYY, HH:mm'
+            });
+        });
+
+        const filter_fields = [
+            'inout', 'datetimepicker-start-input', 'datetimepicker-end-input'
+        ];
+
+        $.each(filter_fields, function (index, field) {
+            let field_value = localStorage.getItem(field);
+            if (field_value !== null) {
+                $('#' + field).val(field_value);
+            }
+        });
+
+        $('#id_history_filter').submit(function (e) {
+            $.each(filter_fields, function (index, field) {
+                localStorage.setItem(field, $('#' + field).val());
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% block html %}
+
+<head>
+  {% block head %}
+  <meta charset="utf-8">
+
+  {% block style %}
+  {# Core Styles for templates #}
+  <link href="{% static 'admin/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'admin/css/responsive.css' %}" rel="stylesheet">
+
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'admin/css/fonts.css' %}" rel="stylesheet">
+  {% endblock %}
+
+  {% block script %}
+  {# Core Scripts for template #}
+  <script src="{% static 'admin/js/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  {% endblock %}
+  {% endblock %}
+</head>
+
+<body id="body">
+{% block body %}
+{{ block.super }}
+{% endblock %}
+</body>
+
+{% endblock %}
+</html>

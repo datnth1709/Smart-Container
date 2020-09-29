@@ -1,0 +1,49 @@
+{% load static i18n customtag %}
+
+<!DOCTYPE html>
+<html lang="en">
+{% block html %}
+
+    <head>
+        {% block head %}
+            <meta charset="utf-8">
+            <title>
+                {% block title %}{{ title }} | {{ site_title|default:_('F.Smart Door') }}{% endblock %}
+            </title>
+
+            {% block style %}
+                {# Core Styles for templates #}
+                <link href="{% static 'styles/bootstrap.min.css' %}" rel="stylesheet">
+                <link href="{% static 'admin/css/responsive.css' %}" rel="stylesheet">
+
+                <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+                <link href="{% static 'css/fonts.css' %}" rel="stylesheet">
+
+                {# Core Styles for custom_admin templates #}
+                <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+                {# Custom Styles #}
+                <link href="{% static 'styles/custom.css' %}" rel="stylesheet">
+            {% endblock %}
+
+            {% block script %}
+                {# Core Scripts for template #}
+                <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+                <script src="{% static 'styles/popper.min.js' %}"></script>
+                {#                <script src="{% static 'scripts/bootstrap.min.js' %}"></script>#}
+                <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+                <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+                {# Core Scripts for custom_admin templates #}
+                <script src="{% static 'js/sb-admin-2.min.js' %}" defer></script>
+            {% endblock %}
+
+        {% endblock %}
+    </head>
+
+    <body id="body">
+    {% block body %}{% endblock %}
+    </body>
+
+{% endblock %}
+</html>

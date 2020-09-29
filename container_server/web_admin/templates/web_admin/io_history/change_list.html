@@ -1,0 +1,6 @@
+{% extends "custom_admin/change_list.html" %}
+{% load static customtag %}
+{% block pre_result_list %}
+    {% history_filter %}
+
+{% endblock %}
